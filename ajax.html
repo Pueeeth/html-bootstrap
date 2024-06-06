@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax Example</title>
+    <style>
+        body {
+            font-family: Helvetica;
+            text-align: center;
+        }
+        #birthday-greeting {
+            font-size: 72px;
+            color: red;
+            text-transform: uppercase;
+        }
+    </style>
+    <script>
+        function sendTheAJAX() {
+            // Create a new XMLHttpRequest object
+            var myRequest = new XMLHttpRequest();
+
+            // Define the callback function to handle the response
+            myRequest.onreadystatechange = function() {
+                // Check if the request is complete
+                if (myRequest.readyState === 4) {
+                    // Check if the request was successful
+                    if (myRequest.status === 200) {
+                        // Update the HTML content with the response text
+                        document.getElementById('ajax-content').innerHTML = myRequest.responseText;
+                    } else {
+                        // Handle the error (optional)
+                        console.error('There was an error with the request. Status:', myRequest.status);
+                    }
+                }
+            };
+
+            // Initialize the request
+            myRequest.open('GET', 'surprise.html', true);
+            // Send the request
+            myRequest.send();
+            // Hide the button
+            document.getElementById('reveal').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <h1>Today's your special day!</h1>
+    <button id="reveal" onclick="sendTheAJAX()" class="button">Why's that?</button>
+    <div id="ajax-content"></div>
+</body>
+</html>
